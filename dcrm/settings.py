@@ -76,12 +76,12 @@ WSGI_APPLICATION = 'dcrm.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dentista',
-        'USER': 'lucas',
-        'PASSWORD' : '123456',
-        'HOST' : 'localhost',
-        'PORT' : '3306',
+        'ENGINE': 'django.db.backends.mysql',     # Change this to make the proyect "Public" in GITHub
+        'NAME': 'dentista',     # Change this to make the proyect "Public" in GITHub   
+        'USER': 'lucas',     # Change this to make the proyect "Public" in GITHub
+        'PASSWORD' : '123456',     # Change this to make the proyect "Public" in GITHub
+        'HOST' : 'localhost',     # Change this to make the proyect "Public" in GITHub
+        'PORT' : '3306',     # Change this to make the proyect "Public" in GITHub
     }
 }
 
