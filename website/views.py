@@ -2,9 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import SignUpForm
+from .models import Customer
 
 # Create your views here.
 def home(request):
+    customers = Customer.objects.all()
+    
     # Check to see if logging in
     if request.method == 'POST':
         username = request.POST['username']
@@ -19,7 +22,7 @@ def home(request):
             messages.error(request, "There Was An Error Logging In, Please Try Again...")
             return render(request, 'home.html', {})  # Render the page again with an error message
     else:
-        return render(request, 'home.html', {})
+        return render(request, 'home.html', {'customers': customers})
 
 def login_user(request): #If you want to make a Login page copy/paste the code in "home"
     pass
