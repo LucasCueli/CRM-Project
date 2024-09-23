@@ -1,6 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1> Customer Selected: </h1>
+<div class="card">
+    <h5 class="card-header">
+        <Strong>{{ customer_selected.first_name }}
+        {{ customer_selected.last_name }}</Strong>
+    </h5>
+    <div class="card-body">
+      
+        <p class="card-text"><Strong>Email:</Strong> {{ customer_selected.email }}</p>   
+        <p class="card-text"><Strong>Phone:</Strong> {{ customer_selected.phone }}</p>   
+        <p class="card-text"><Strong>Address:</Strong> {{ customer_selected.address }}</p>   
+        <p class="card-text"><Strong>City:</Strong> {{ customer_selected.city }}</p> 
+        <p class="card-text"><Strong>State:</Strong> {{ customer_selected.state }}</p>   
+        <p class="card-text"><Strong>Zipcode:</Strong> {{ customer_selected.zipcode }}</p>   
+        <p class="card-text"><Strong>Created:</Strong> {{ customer_selected.created_at }}</p>    
+        <p class="card-text"><Strong>ID:</Strong> {{ customer_selected.id }}</p>    
+      
+    </div>
+  </div>
+
+   <br/>
+   <a href="{% url 'home' %}" class="btn btn-secondary">Go Back</a>                        
+
+   <a href="{% url 'home' %}" class="btn btn-danger">Delete</a>  
 
 {% endblock %}
