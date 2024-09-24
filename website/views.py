@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import SignUpForm
+from .forms import SignUpForm, AddCustomerForm
 from .models import Customer
 
 # Create your views here.
@@ -58,4 +58,40 @@ def customer_selected(request, pk):
         return render(request, 'customer.html', {'customer_selected' : customer_selected})
     else:
         messages.success(request, "You Must Be Logged In To View That Page...")
+        return redirect('home')
+    
+def delete_customer(request, pk):
+    if request.user.is_authenticated:    
+        delete_it = Customer.objects.get(id=pk)
+        delete_it.delete()
+        messages.success(request, "Customer Deleted Succesfully... ")
+        return redirect('home')
+    else:
+        messages.success(request, "You Must Be Logged In To Do That ")
+        return redirect('home')
+    
+def add_customer(request):
+    form = AddCustomerForm(request.POST or None)
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            if form.is_valid():
+                add_customer = form.save()
+                messages.success(request, "Customer Added")
+                return redirect('home')
+        return render(request, 'add_customer.html', {'form':form})
+    else:
+        messages.success(request, "You Must Be Logged In")
+        return redirect('home')
+    
+def update_customer(request, pk):
+    if request.user.is_authenticated:
+        current_customer = Customer.objects.get(id=pk)
+        form = AddCustomerForm(request.POST or None, instance=current_customer)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Customer Has Been Updated..")
+            return redirect('home')
+        return render(request, 'update_customer.html', {'form':form})
+    else:
+        messages.success(request, "You Must Be Logged In")
         return redirect('home')
